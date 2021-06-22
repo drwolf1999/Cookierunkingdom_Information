@@ -1,0 +1,4 @@
+front-end : vue-js(typescript)
+back-end : Node-js
+
+DB: mongoDB(mongoose

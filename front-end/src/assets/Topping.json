@@ -1,0 +1,92 @@
+[
+    {
+        "key": "Almond",
+        "name": "아몬드",
+        "description": "피해감소 증가",
+        "default": 1.7,
+        "upgrade": 0.2,
+        "firstOption": "...",
+        "secondOption": "피해감소 5%"
+    },
+    {
+        "key": "Applejelly",
+        "name": "과즘팡팡 애플젤리",
+        "description": "치명타 확률 증가",
+        "default": 1.8,
+        "upgrade": 0.1,
+        "firstOption": "...",
+        "secondOption": "치명타확률 5%"
+    },
+    {
+        "key": "Caramel",
+        "name": "통통튀는 캐러멜",
+        "description": "공격속도 증가",
+        "default": 1.7,
+        "upgrade": 0.2,
+        "firstOption": "공격속도 1%",
+        "secondOption": "공격속도 2%"
+    },
+    {
+        "key": "Chocolatecandy",
+        "name": "달콤 초코 캔디",
+        "description": "이로운 효과 증가",
+        "default": 1.8,
+        "upgrade": 0.1,
+        "firstOption": "이로운 효과 증가 1%",
+        "secondOption": "이로운 효과 증가 2%"
+    },
+    {
+        "key": "Chocolatechip",
+        "name": "째깍째깍 초콜릿칩",
+        "description": "쿨타임 감소",
+        "default": 1.8,
+        "upgrade": 0.1,
+        "firstOption": "...",
+        "secondOption": "쿨타임 감소 5%"
+    },
+    {
+        "key": "Hazelnut",
+        "name": "든든한 헤이즐넛",
+        "description": "치명타 피해 감소",
+        "default": 2.1,
+        "upgrade": 0.2,
+        "firstOption": "치명타 피해감소 10%",
+        "secondOption": "치명타 피해감소 15%"
+    },
+    {
+        "key": "Kiwi",
+        "name": "상큼한 조각 키위",
+        "description": "해로운 효과 감소",
+        "default": 1.7,
+        "upgrade": 0.2,
+        "firstOption": "해로운 효과 감소 3%",
+        "secondOption": "해로운 효과 감소 5%"
+    },
+    {
+        "key": "Peanut",
+        "name": "건강한 땅콩",
+        "description": "체력 증가",
+        "default": 1.7,
+        "upgrade": 0.2,
+        "firstOption": "체력 3% 증가",
+        "secondOption": "체력 5% 증가"
+    },
+    {
+        "key": "Raspberry",
+        "name": "화끈화끈 라즈베리",
+        "description": "공격력 증가",
+        "default": 1.7,
+        "upgrade": 0.2,
+        "firstOption": "공격력 3% 증가",
+        "secondOption": "공격력 5% 증가"
+    },
+    {
+        "key": "Walnut",
+        "name": "딱딱한 호두",
+        "description": "방어력 증가",
+        "default": 1.7,
+        "upgrade": 0.2,
+        "firstOption": "방어력 3% 증가",
+        "secondOption": "방어력 5% 증가"
+    }
+]

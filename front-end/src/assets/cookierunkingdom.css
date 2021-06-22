@@ -1,0 +1,66 @@
+.epic {
+    background: #D5598D !important;
+}
+
+.epic__sub {
+    background: #FFE4F4 !important;
+}
+
+.rare {
+    background: #6EAFD9 !important;
+}
+
+.rare__sub {
+    background: #CDF6FF !important;
+}
+
+.common {
+    background: #BA987C !important;
+}
+
+.common__sub {
+    background: #FFEACE !important;
+}
+
+.new__line {
+    white-space: pre-line;
+}
+
+.img__big {
+    width: 75px;
+    height: 75px;
+}
+
+.img__middle {
+    width: 65px;
+    height: 65px;
+}
+
+.img__small {
+    width: 50px;
+    height: 50px;
+}
+
+.cookie__border__big {
+    border-radius: 15px;
+}
+
+.cookie__border__middle {
+    border-radius: 13px;
+}
+
+.cookie__border__small {
+    border-radius: 10px;
+}
+
+.active {
+    background: #DADDE2!important;
+}
+
+*[class^="img__"], *[class*=" img__"] {
+    text-align: center;
+}
+
+*[class^="img__"] > img, *[class*=" img__"] > img {
+    height: 100%;
+}
