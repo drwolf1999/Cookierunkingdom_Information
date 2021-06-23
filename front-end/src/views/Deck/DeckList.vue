@@ -1,12 +1,19 @@
 <template>
     <v-row class="mt-7" v-if="ValidConnection">
         <v-col class="col-3">
-            <CookieList/>
+            <CookieList v-on:element-select="AddIncludeCookie($event)"/>
+
+            <v-card tile>
+                <v-card-subtitle>포함할 쿠키</v-card-subtitle>
+                <v-card-title>
+                    <Cookie class="ml-1" v-for="c in includeCookies" :key="c" img-size="small" :cookie-key="c" @click.native="Delete(c)"/>
+                </v-card-title>
+            </v-card>
         </v-col>
         <v-col class="col-9">
             <v-row>
                 <v-spacer></v-spacer>
-                <v-btn color="success" @click="$router.push(`/deck/write?mode=${mode}`)">새로운 덱 추천</v-btn>
+                <v-btn color="success" @click="$router.push(`/deck/write?mode=${mode}`)">덱 추천 해주기</v-btn>
             </v-row>
             <div class="mt-7">
                 <v-expansion-panels v-if="!loading && decks.length > 0">
@@ -30,11 +37,13 @@ import Deck from "@/components/Deck.vue";
 import CookieList from "@/components/CookieList.vue";
 
 import DeckService from "@/service/deck";
+import Cookie from "@/components/Cookie.vue";
 
 export default Vue.extend({
     name: 'DeckList',
 
     components: {
+        Cookie,
         CookieList,
         Deck,
     },
@@ -50,20 +59,37 @@ export default Vue.extend({
         this.FetchDeck();
     },
 
-    data() {
+    data(): { decks: string[], loading: boolean, includeCookies: string[] } {
         return {
             decks: [],
             loading: false,
+            includeCookies: [],
         }
     },
     methods: {
         FetchDeck() {
             this.loading = true;
-            DeckService.GetDecks(this.mode).then(response => {
+            DeckService.GetDecks({
+                mode: this.mode,
+                include: this.includeCookies,
+            }).then(response => {
                 this.loading = false;
                 this.decks = response.data.decks;
             })
         },
+        AddIncludeCookie(cookie: string) {
+            if (this.includeCookies.indexOf(cookie) > -1) return;
+            if (this.includeCookies.length >= 5) return;
+            this.includeCookies.push(cookie);
+            this.FetchDeck();
+        },
+        Delete(e: string) {
+            const idx = this.includeCookies.indexOf(e);
+            if (idx > -1) {
+                this.includeCookies.splice(idx, 1);
+                this.FetchDeck();
+            }
+        }
     },
     computed: {
         ValidConnection(): boolean {

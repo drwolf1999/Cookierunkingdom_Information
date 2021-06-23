@@ -7,6 +7,7 @@ import Topping from '@/views/Topping/Index.vue';
 import Dragon from '@/views/Dragon/HP.vue';
 import Cookies from '@/views/Cookie/Index.vue';
 import DeckForm from '@/views/Deck/DeckForm.vue';
+import Coupon from '@/views/Coupon/Index.vue';
 
 Vue.use(VueRouter)
 
@@ -48,11 +49,11 @@ const routes: Array<RouteConfig> = [
     //     name: 'event',
     //     component: Home
     // },
-    // {
-    //     path: '/coupon',
-    //     name: 'coupon',
-    //     component: Home
-    // },
+    {
+        path: '/coupon',
+        name: 'coupon',
+        component: Coupon
+    },
     {
         path: '/about',
         name: 'About',

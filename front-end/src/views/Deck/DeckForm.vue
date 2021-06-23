@@ -53,6 +53,19 @@
                         </v-row>
                     </v-card>
                 </template>
+                <div class="mt-4" v-if="alreadyDecks.length > 0">
+                    <v-divider></v-divider>
+                    <div class="mt-4">
+                        <span>유사한 덱</span>
+                        <v-expansion-panels>
+                            <Deck
+                                v-for="(deck, index) in alreadyDecks" :key="`already_${index}`"
+                                :deck="deck"
+                            ></Deck>
+                        </v-expansion-panels>
+                    </div>
+                </div>
+
                 <v-row class="mt-5" v-if="deck.length > 0">
                     <v-spacer></v-spacer>
                     <v-btn color="success" @click="Upload">작성 완료</v-btn>
@@ -73,6 +86,8 @@ import ToppingList from "@/components/ToppingList.vue";
 import Topping from "@/components/Topping.vue";
 import Cookie from "@/components/Cookie.vue";
 import deck from "@/service/deck";
+import Deck from "@/components/Deck.vue";
+import DeckService from "@/service/deck";
 
 const ALREADY_EXIST = '해당 쿠키는 이미 덱에 존재합니다.';
 const MAX_COOKIE_5 = '팀원의 최대 수는 5입니다.';
@@ -85,11 +100,12 @@ export default Vue.extend({
             default: 'story',
         }
     },
-    components: {Cookie, Topping, ToppingList, DeckPreview, CookieList},
-    data(): { selectCookie: string, deckName: string, deck: string[], comment: Record<string, string>, toppings: Record<string, string[]>, errMsg: string, showMsg: boolean, } {
+    components: {Deck, Cookie, Topping, ToppingList, DeckPreview, CookieList},
+    data(): { selectCookie: string, deckName: string, alreadyDecks: [], deck: string[], comment: Record<string, string>, toppings: Record<string, string[]>, errMsg: string, showMsg: boolean, } {
         return {
             selectCookie: '',
             deckName: '',
+            alreadyDecks: [],
             deck: [],
             toppings: {},
             comment: {},
@@ -165,12 +181,35 @@ export default Vue.extend({
                     this.$router.push(`/deck?mode=${this.mode}`);
                 });
         },
+        ClearAlreadyDecks() {
+            this.alreadyDecks.splice(0, this.alreadyDecks.length);
+        },
+        LoadAlreadyDeck() {
+            console.log('loadAlreadyDeck()')
+            this.ClearAlreadyDecks();
+            DeckService.GetDecksByCookie({
+                mode: this.mode,
+                include: this.deck,
+            }).then(response => {
+                this.alreadyDecks = response.data.decks;
+            })
+        },
     },
     computed: {
         ValidConnection(): boolean {
             const validMode: string[] = ['story', 'arena', 'guild'];
             const mode = this.mode;
             return validMode.indexOf(mode) !== -1;
+        },
+    },
+    watch: {
+        deck(nv) {
+            console.log('watch : deck');
+            if (nv.length > 0) {
+                this.LoadAlreadyDeck();
+            } else {
+                this.ClearAlreadyDecks();
+            }
         }
     }
 })

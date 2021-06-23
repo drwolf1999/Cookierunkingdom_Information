@@ -5,8 +5,13 @@ import axios from "axios";
 // auth 에 대한 Action 정의
 export default {
     // Get
-    GetDecks(mode: string): Promise<any> {
-        return axios.get(`${Constants.SERVER_DOMAIN}/deck?mode=${mode}`);
+    GetDecks(option: Record<string, unknown>): Promise<any> {
+        console.log(option)
+        return axios.get(`${Constants.SERVER_DOMAIN}/deck`, {params: option});
+    },
+    GetDecksByCookie(option: Record<string, unknown>): Promise<any> {
+        console.log(option)
+        return axios.get(`${Constants.SERVER_DOMAIN}/deck/info`, {params: option});
     },
     // Post
     CreateDeck(data: any): Promise<any> {
