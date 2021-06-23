@@ -5,5 +5,6 @@ import DeckController from "../../controllers/DeckController";
 
 router.get('/', DeckController.All);
 router.post('/write', DeckController.Write);
+router.get('/info', DeckController.Info);
 
 export default router;

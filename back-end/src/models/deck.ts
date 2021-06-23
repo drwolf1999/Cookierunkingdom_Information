@@ -15,11 +15,11 @@ const DeckSchema = new mongoose.Schema({
     units: {
         type: [mongoose.Schema.Types.Mixed],
         validate: {
-            validator: function (v: any) {
+            validator: (v: any) => {
                 if (!Array.isArray(v)) {
                     return false;
                 }
-                let Size = v.length;
+                const Size = v.length;
                 if (Size > 5) {
                     return false;
                 }

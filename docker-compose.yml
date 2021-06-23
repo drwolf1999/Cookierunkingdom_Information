@@ -16,3 +16,14 @@ services:
     build: ./back-end
     ports:
       - "3000:3000"
+  db:
+    container_name: db
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - ./mongoData:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod --auth
