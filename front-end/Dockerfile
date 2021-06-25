@@ -26,7 +26,7 @@ RUN npm install @vue/cli -g
 RUN npm install @vue/cli-service-global -g
 
 # Copy our source code into the container
-COPY ../front-end .
+COPY . .
 
 # run webpack and the vue-loader
 RUN npm run build

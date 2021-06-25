@@ -4,6 +4,10 @@
 import express, {Request, Response, NextFunction} from "express";
 import helmet from "helmet";
 import mongoose from "mongoose";
+import logger from 'morgan';
+import moment from "moment";
+import 'moment-timezone';
+
 import router from "./routes";
 import constantsSecret from "./constants";
 
@@ -18,15 +22,17 @@ const port = 3000; // default port to listen
  *  App Configuration
  */
 
+moment.tz.setDefault("Asia/Seoul")
+
 /**
  * DB 설정
- * */
+ */
 // [ CONFIGURE mongoose ]
 
 // CONNECT TO MONGODB SERVER
 const db = mongoose.connection;
 db.on('error', console.error);
-db.once('open', function () {
+db.once('open', () => {
     // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
 });
@@ -48,6 +54,7 @@ mongoose.connect(constantsSecret.dbUrl, {
         console.log('error : ' + error);
     });
 
+app.use(logger('dev'));
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -79,11 +86,11 @@ interface Error {
 }
 
 // catch 404 and forward to error handler
-app.use(function (error: Error, req: Request, res: Response, next: NextFunction) {
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(error.status || 500);
     res.render('error', {
         message: error.message,
-        error: error
+        error
     });
 });
 

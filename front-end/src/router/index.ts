@@ -8,6 +8,9 @@ import Dragon from '@/views/Dragon/HP.vue';
 import Cookies from '@/views/Cookie/Index.vue';
 import DeckForm from '@/views/Deck/DeckForm.vue';
 import Coupon from '@/views/Coupon/Index.vue';
+import BoardList from '@/views/Board/List.vue';
+import BoardView from '@/views/Board/View.vue';
+import BoardForm from '@/views/Board/Form.vue';
 
 Vue.use(VueRouter)
 
@@ -39,11 +42,28 @@ const routes: Array<RouteConfig> = [
         name: 'topping',
         component: Topping
     },
-    // {
-    //     path: '/board',
-    //     name: 'board',
-    //     component: Home
-    // },
+    {
+        path: '/board/community',
+        name: 'BoardList',
+        component: BoardList
+    },
+    {
+        path: '/board/community/write',
+        name: 'BoardWrite',
+        component: BoardForm
+    },
+    {
+        path: '/board/community/modify/:boardId',
+        name: 'BoardUpdate',
+        component: BoardView,
+        props: true,
+    },
+    {
+        path: '/board/community/view/:boardId',
+        name: 'BoardView',
+        component: BoardView,
+        props: true,
+    },
     // {
     //     path: '/event',
     //     name: 'event',
