@@ -4,15 +4,14 @@ import axios from "axios";
 // auth 에 대한 Action 정의
 export default {
     // Get
-    GetComments(boardId: number): Promise<any> {
+    GetComments(boardId: number | string): Promise<any> {
         return axios.get(`${Constants.SERVER_DOMAIN}/comment/board/${boardId}`);
     },
     // Post
-    CreateComment(boardId: number, data: {
+    CreateComment(boardId: number | string, data: {
         username: string,
         password: string,
-        boardId: number,
-        parentComment: number | null,
+        parentComment: number | string | null,
         content: string,
     }): Promise<any> {
         const headers = {

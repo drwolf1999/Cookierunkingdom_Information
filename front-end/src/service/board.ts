@@ -10,7 +10,7 @@ export default {
         console.log(option)
         return axios.get(`${Constants.SERVER_DOMAIN}/board`, {params: option});
     },
-    GetBoardById(id: number): Promise<any> {
+    GetBoardById(id: number | string): Promise<any> {
         console.log(id)
         return axios.get(`${Constants.SERVER_DOMAIN}/board/${id}`);
     },
