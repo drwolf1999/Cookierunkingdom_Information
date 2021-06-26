@@ -4,6 +4,8 @@ node_modules
 
 src/constants/*
 
+.env.local
+
 # Editor directories and files
 .idea
 .vscode

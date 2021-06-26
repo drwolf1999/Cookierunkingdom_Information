@@ -7,10 +7,10 @@ import mongoose from "mongoose";
 import logger from 'morgan';
 import moment from "moment";
 import 'moment-timezone';
+import path from "path";
+import dotenv from "dotenv";
 
 import router from "./routes";
-import constantsSecret from "./constants";
-
 
 /**
  * App Variables
@@ -24,12 +24,20 @@ const port = 3000; // default port to listen
 
 moment.tz.setDefault("Asia/Seoul")
 
+dotenv.config({
+    path: path.resolve(
+        process.cwd(),
+        process.env.NODE_ENV = "production" ? ".env.local" : ".env.local"
+    )
+});
+
 /**
  * DB 설정
  */
 // [ CONFIGURE mongoose ]
 
 // CONNECT TO MONGODB SERVER
+import constantsSecret from "./constants";
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => {

@@ -23,10 +23,12 @@
     "@types/moment": "^2.13.0",
     "@types/moment-timezone": "^0.5.30",
     "@types/morgan": "^1.9.2",
+    "dotenv": "^10.0.0",
     "helmet": "^4.6.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.14",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
   }
 }
