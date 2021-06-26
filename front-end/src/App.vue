@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <Menu/>
-        <v-container>
+        <v-container class="col-xl-9">
             <router-view/>
         </v-container>
     </v-app>

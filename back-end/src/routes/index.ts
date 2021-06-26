@@ -4,6 +4,7 @@ const router = express.Router();
 import deckRouter from "./deck/index";
 import boardRouter from './board/index';
 import commentRouter from './comment/index';
+import cookieRouter from './cookie/index';
 
 router.get('/', (req, res, next) => {
     console.log('init');
@@ -15,5 +16,6 @@ router.get('/', (req, res, next) => {
 router.use('/deck', deckRouter);
 router.use('/board', boardRouter);
 router.use('/comment', commentRouter);
+router.use('/cookie', cookieRouter);
 
 export default router;

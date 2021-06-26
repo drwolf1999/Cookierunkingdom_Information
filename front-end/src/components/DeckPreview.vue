@@ -1,7 +1,7 @@
 <template>
     <div class="deck">
         <div class="deck__item" v-for="cookie in deck" :key="cookie">
-            <Cookie v-bind:cookie-key="cookie" @click.native="$emit('element-click', cookie)"/>
+            <Cookie v-bind:cookie-key="cookie" @click.native="$emit('element-click', cookie)" :img-size="imgSize"/>
         </div>
     </div>
 </template>
@@ -17,6 +17,10 @@ export default Vue.extend({
         deck: {
             type: Array,
         },
+        imgSize: {
+            type: String,
+            default: 'big'
+        }
     },
 
     components: {

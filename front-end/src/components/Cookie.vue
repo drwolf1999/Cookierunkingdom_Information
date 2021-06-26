@@ -40,15 +40,15 @@ export default Vue.extend({
 </script>
 
 <style>
-.cookie__common {
-    border: #BA987C solid 3px;
-}
+/*.cookie__common {*/
+/*    border: #BA987C solid 3px;*/
+/*}*/
 
-.cookie__rare {
-    border: #6EAFD9 solid 3px;
-}
+/*.cookie__rare {*/
+/*    border: #6EAFD9 solid 3px;*/
+/*}*/
 
-.cookie__epic {
-    border: #D5598D solid 3px;
-}
+/*.cookie__epic {*/
+/*    border: #D5598D solid 3px;*/
+/*}*/
 </style>

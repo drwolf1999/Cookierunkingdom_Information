@@ -24,18 +24,17 @@ const DeckSchema = new mongoose.Schema({
                     return false;
                 }
                 for (let i = 0; i < Size; i++) {
-                    if (!Object.prototype.hasOwnProperty.call(v[i], 'name')) {
+                    if (!Object.prototype.hasOwnProperty.call(v[i], 'cookie')) {
                         return false;
                     }
                     if (!Object.prototype.hasOwnProperty.call(v[i], 'topping')) {
                         return false;
                     }
+                    if (!Object.prototype.hasOwnProperty.call(v[i], 'comment')) {
+                        return false;
+                    }
                     const keySize = Object.keys(v[i]).length;
-                    if (keySize === 3) {
-                        if (!Object.prototype.hasOwnProperty.call(v[i], 'comment')) {
-                            return false;
-                        }
-                    } else if (keySize > 3) {
+                    if (keySize > 3) {
                         return false;
                     }
                     if (!Array.isArray(v[i].topping)) {

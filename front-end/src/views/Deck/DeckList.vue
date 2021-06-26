@@ -1,6 +1,6 @@
 <template>
     <v-row class="mt-7" v-if="ValidConnection">
-        <v-col class="col-3">
+        <v-col lg="3" xl="3" md="3" cols="12">
             <CookieList v-on:element-select="AddIncludeCookie($event)"/>
 
             <v-card tile>
@@ -10,10 +10,10 @@
                 </v-card-title>
             </v-card>
         </v-col>
-        <v-col class="col-9">
+        <v-col lg="9" xl="9" md="9" cols="12">
             <v-row>
                 <v-spacer></v-spacer>
-                <v-btn color="success" @click="$router.push(`/deck/write?mode=${mode}`)">덱 추천 해주기</v-btn>
+                <v-btn class="hidden-sm-and-down" color="success" @click="$router.push(`/deck/write?mode=${mode}`)">덱 추천 해주기</v-btn>
             </v-row>
             <div class="mt-7">
                 <v-expansion-panels v-if="!loading && decks.length > 0">
@@ -24,6 +24,7 @@
                 </v-card>
                 <v-skeleton-loader v-else class="mx-auto" type="card"></v-skeleton-loader>
             </div>
+            <v-btn class="hidden-md-and-up" block color="success" @click="$router.push(`/deck/write?mode=${mode}`)">덱 추천 해주기</v-btn>
         </v-col>
     </v-row>
     <div v-else>

@@ -155,7 +155,7 @@ export default Vue.extend({
             this.deck.splice(this.deck.indexOf(v), 1);
             delete this.toppings[v];
         },
-        Upload() {
+        async Upload() {
             let dName = this.deckName;
             if (dName.trim().length === 0) {
                 this.SetMsg('덱 이름을 적어주세요');
@@ -165,8 +165,9 @@ export default Vue.extend({
             const dSize = this.deck.length;
             for (let i = 0; i < dSize; i++) {
                 units.push({
-                    name: this.deck[i],
+                    cookie: this.deck[i],
                     topping: this.toppings[this.deck[i]],
+                    comment: this.comment[this.deck[i]] || '',
                 })
             }
             let data = {
@@ -175,11 +176,10 @@ export default Vue.extend({
                 units: units,
                 type: this.mode,
             };
-            deck.CreateDeck(data)
-                .then(response => {
-                    console.log(response.data.message);
-                    this.$router.push(`/deck?mode=${this.mode}`);
-                });
+
+            await deck.CreateDeck(data);
+
+            await this.$router.push(`/deck?mode=${this.mode}`);
         },
         ClearAlreadyDecks() {
             this.alreadyDecks.splice(0, this.alreadyDecks.length);

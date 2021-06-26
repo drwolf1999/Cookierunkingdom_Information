@@ -1,6 +1,5 @@
 import * as express from "express";
 import Comment from "../models/comment";
-import comment from "../../../front-end/src/service/comment";
 
 export default {
     All: async (req: express.Request, res: express.Response, next: express.NextFunction) => {

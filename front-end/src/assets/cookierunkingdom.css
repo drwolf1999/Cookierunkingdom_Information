@@ -41,17 +41,26 @@
     height: 50px;
 }
 
-.cookie__border__big {
-    border-radius: 15px;
+.img__xs {
+    width: 23px;
+    height: 23px;
 }
 
-.cookie__border__middle {
-    border-radius: 13px;
-}
+/*.cookie__border__big {*/
+/*    border-radius: 15px;*/
+/*}*/
 
-.cookie__border__small {
-    border-radius: 10px;
-}
+/*.cookie__border__middle {*/
+/*    border-radius: 13px;*/
+/*}*/
+
+/*.cookie__border__small {*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*.cookie__border__xs {*/
+/*    border-radius: 4px;*/
+/*}*/
 
 .active {
     background: #DADDE2!important;

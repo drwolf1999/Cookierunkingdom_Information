@@ -1,5 +1,6 @@
 import * as express from "express";
 import Deck from "../models/deck";
+import CookieController from "./CookieController";
 
 export default {
     All: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -14,7 +15,7 @@ export default {
             }
             filter[`type`] = mode;
             if (includeCookie !== undefined) {
-                filter['units.name'] = {$all: includeCookie};
+                filter['units.cookie'] = {$all: includeCookie};
             }
             console.log(filter);
             const ret = await Deck.find(
@@ -43,8 +44,24 @@ export default {
                 units,
                 type,
             });
+            const unitsSize = units.length;
+            for (let i = 0; i < unitsSize; i++) {
+                const tSize = units[i].topping.length;
+                const param: Record<string, number> = {};
+                for (let j = 0; j < tSize; j++) {
+                    if (!Object.prototype.hasOwnProperty.call(param, units[i].topping[j])) {
+                        param[units[i].topping[j]] = 1;
+                        continue;
+                    }
+                    param[units[i].topping[j]] = param[units[i].topping[j]] + 1;
+                }
+                for (const p in param) {
+                    if (Object.prototype.hasOwnProperty.call(param, p)) {
+                        await CookieController.Write(units[i].cookie, p, param[p]);
+                    }
+                }
+            }
             deck = await deck.save();
-            console.log(type, deck);
             return res.status(201).json({
                 deck,
                 message: 'create success',
