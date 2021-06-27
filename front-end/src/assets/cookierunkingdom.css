@@ -1,3 +1,19 @@
+.legendary {
+    background: #54DCF7 !important;
+}
+
+.legendary__sub {
+    background: #8DFFDE !important;
+}
+
+.ancient {
+    background: #E27DFD !important;
+}
+
+.ancient__sub {
+    background: #FFE8FF !important;
+}
+
 .epic {
     background: #D5598D !important;
 }
@@ -42,8 +58,8 @@
 }
 
 .img__xs {
-    width: 23px;
-    height: 23px;
+    width: 30px;
+    height: 30px;
 }
 
 /*.cookie__border__big {*/
@@ -63,7 +79,7 @@
 /*}*/
 
 .active {
-    background: #DADDE2!important;
+    background: #DADDE2 !important;
 }
 
 *[class^="img__"], *[class*=" img__"] {

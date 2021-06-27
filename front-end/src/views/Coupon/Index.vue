@@ -9,7 +9,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="coupon in coupons" :key="coupon">
+                <tr v-for="coupon in coupons" :key="coupon.name">
                     <td>{{ coupon.name }}</td>
                     <td>{{ coupon.active }}</td>
                 </tr>

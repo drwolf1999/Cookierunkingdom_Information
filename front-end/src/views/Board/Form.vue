@@ -4,7 +4,6 @@
         <v-card class="pa-4">
             <v-card-title>글쓰기</v-card-title>
             <v-card-text>
-                {{ post }}
                 <v-row justify="center" align="center">
                     <v-col cols="5">
                         <v-text-field label="아이디" v-model="post.username"></v-text-field>

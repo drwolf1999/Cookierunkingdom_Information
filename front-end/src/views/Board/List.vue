@@ -3,7 +3,7 @@
         <v-card class="pa-4">
             <v-card-title>
                 <v-spacer></v-spacer>
-                <v-text-field v-model="Query" @keyup.enter="SearchBoard" label="게시물 검색" append-icon="mdi-magnify"></v-text-field>
+                <v-text-field v-model="Query" @keyup.enter="FetchBoard" label="게시물 검색" append-icon="mdi-magnify"></v-text-field>
             </v-card-title>
             <v-card-text>
                 <v-simple-table>
@@ -62,16 +62,13 @@ export default Vue.extend({
         this.FetchBoard();
     },
     methods: {
-        SearchBoard() {
-            // do something
-        },
         FetchBoard() {
+            console.log(this.Query)
             board.GetBoards({
                 query: this.Query,
             })
                 .then(response => {
                     this.boards = response.data.boards;
-                    console.log(this.boards)
                 });
         }
     }

@@ -20,14 +20,14 @@
             </v-col>
         </v-row>
         <v-divider></v-divider>
-        <v-row align="center" class="pa-3 text-center">
+        <v-row align="center" class="pa-3 text-center" justify="center">
             <v-col>
                 <v-row>
                     <v-col>3세트 옵션</v-col>
                     <v-divider vertical></v-divider>
                     <v-col>5세트 옵션</v-col>
                 </v-row>
-                <v-divider></v-divider>
+                <v-divider class="my-3"></v-divider>
                 <v-row>
                     <v-col>{{ Topping.firstOption }}</v-col>
                     <v-divider vertical></v-divider>
@@ -36,14 +36,14 @@
             </v-col>
         </v-row>
         <v-divider></v-divider>
-        <v-row align="center" class="pa-3 text-center">
+        <v-row align="center" class="pa-3 text-center" justify="center">
             <v-col>
                 <v-row>
                     <v-col>초기 계수</v-col>
                     <v-divider vertical></v-divider>
                     <v-col>강화 계수</v-col>
                 </v-row>
-                <v-divider></v-divider>
+                <v-divider class="my-3"></v-divider>
                 <v-row>
                     <v-col>{{ Topping.default }}%</v-col>
                     <v-divider vertical></v-divider>

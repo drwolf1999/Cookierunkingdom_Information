@@ -76,7 +76,6 @@ export default Vue.extend({
     },
     methods: {
         Submit() {
-            console.log('init')
             comment.CreateComment(this.boardId, {
                 username: this.username,
                 content: this.content,

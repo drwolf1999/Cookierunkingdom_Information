@@ -342,5 +342,37 @@
     "tier": "common",
     "type": "Magic",
     "position": "Middle"
+  },
+  {
+    "key": "Pastry",
+    "name": "페스츄리",
+    "description": "부정함에 맞서 힘을 주소서... 일반 공격으로 타격 후 가까운 적에게 튕겨내는 빛 화살을 발사한다. 스킬 사용 시 교단의 은총을 빌려 일반공격 피해가 강화 되고 잠시 동안 자신의 공격 속도가 증가 된다.\n쿨타임: 13초",
+    "tier": "epic",
+    "type": "Ranged",
+    "position": "Rear"
+  },
+  {
+    "key": "CreamPuff",
+    "name": "슈크림",
+    "description": "넓은 영역에 젤리 회오리가 휘몰아치며 범위 피해를 준다. 더불어 마법의 힘으로 아군 전체의 체력을 회복한다.\n쿨타임: 18초",
+    "tier": "epic",
+    "type": "Support",
+    "position": "Rear"
+  },
+  {
+    "key": "SeaFairy",
+    "name": "바다요정",
+    "description": "소환수를 제외한 가장 가까운 최대 다섯 적에게 물줄기를 쏘아 기절시키며, 일정 시간 후 물줄기가 만든 보름달 같은 웅덩이에서 영원의 힘을 담은 물기둥이 솟구쳐 큰 피해를 입힌다.\n쿨타임: 17초",
+    "tier": "legendary",
+    "type": "Bomber",
+    "position": "Middle"
+  },
+  {
+    "key": "Mango",
+    "name": "망고",
+    "description": "전방에 트로피컬 향이 가득한 망고주스파도를 일으켜 피해를 준다. 상큼달달하게 몰아치는 파도를 본 아군의 공격력이 잠시 증가한다.\n쿨타임: 15초",
+    "tier": "epic",
+    "type": "Magic",
+    "position": "Middle"
   }
 ]

@@ -5,16 +5,37 @@ import Comment from "../models/comment";
 export default {
     All: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
-            const filter = {};
-            const ret = await Board
-                .find(filter)
-                .select('-_id -__v')
-                .limit(20); // TODO pagination
+            const query = req.query.query === undefined || req.query.query === null ? '' : req.query.query;
+            let ret = [];
+            console.log(query)
+            if (query !== '') {
+                // @ts-ignore
+                ret = await Board.find({
+                    $or: [
+                        {
+                            $or: [
+                                {"title": {$regex: query, $options: 'i'}},
+                                {"content": {$regex: query, $options: 'i'}},
+                            ]
+                        },
+                        {
+                            $text: {$search: query, $caseSensitive: false}
+                        }
+                    ]
+                })
+                    .select('-_id -__v')
+                    .limit(20); // TODO pagination
+            } else {
+                ret = await Board.find({})
+                    .select('-_id -__v')
+                    .limit(20); // TODO pagination
+            }
             // const boardComments: number[] = [];
             const retSize = ret.length;
             for (let i = 0; i < retSize; i++) {
-                ret[i] = {...ret[i]}._doc;
-                ret[i].commentSize = await Comment.countDocuments({boardId: ret[i].id})
+                const r = {...ret[i]}._doc;
+                Object.assign(r, {commentSize: await Comment.countDocuments({boardId: ret[i].id})});
+                ret[i] = r;
                 // boardComments.push(await Comment.countDocuments({boardId: ret[i].id}));
             }
             console.log(ret);
@@ -24,6 +45,7 @@ export default {
                 message: 'success'
             });
         } catch (error) {
+            console.log(error)
             return res.status(500).json({
                 message: 'error'
             });
@@ -57,7 +79,8 @@ export default {
     },
     GetById: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
-            const id = req.params.id;
+            // tslint:disable-next-line:radix
+            const id = parseInt(req.params.id);
             const ret = await Board.findOne({id}, '-_id -__v -id -password');
             return res.status(200).json({
                 board: ret,

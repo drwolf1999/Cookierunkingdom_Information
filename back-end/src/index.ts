@@ -49,6 +49,7 @@ mongoose.connect(constantsSecret.dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true,
     auth: {
         user: constantsSecret.user,
         password: constantsSecret.pwd,

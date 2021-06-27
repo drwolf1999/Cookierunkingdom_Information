@@ -3,7 +3,7 @@ import {default as cookieList} from '@/assets/Cookie.json';
 export default class CookieClass {
     static GetCookies(): any {
         let ret = [...cookieList];
-        const tierOrder = ['ancient', 'epic', 'rare', 'common'];
+        const tierOrder = ['legendary', 'ancient', 'epic', 'rare', 'common'];
         ret = ret.sort(function (a, b) {
             return tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier);
         });
