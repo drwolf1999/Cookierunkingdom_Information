@@ -17,7 +17,7 @@
             </v-row>
             <div class="mt-7">
                 <v-expansion-panels v-if="!loading && decks.length > 0">
-                    <Deck class="mb-2" v-for="(deck, index) in decks" :key="index" :deck="deck"/>
+                    <Deck class="mb-2" v-for="(deck, index) in decks" :key="index" :deck="deck" v-on:vote="Vote"/>
                 </v-expansion-panels>
                 <v-card v-else-if="!loading" tile class="pa-3">
                     <v-card-text>아직 추천 덱이 없습니다..</v-card-text>
@@ -39,7 +39,16 @@ import CookieList from "@/components/CookieList.vue";
 
 import DeckService from "@/service/deck";
 import Cookie from "@/components/Cookie.vue";
+import axios from "axios";
 
+
+interface DECK {
+    id: number,
+    name: string,
+    units: Record<string, undefined>[],
+    type: string,
+    vote: number,
+}
 export default Vue.extend({
     name: 'DeckList',
 
@@ -60,7 +69,7 @@ export default Vue.extend({
         this.FetchDeck();
     },
 
-    data(): { decks: string[], loading: boolean, includeCookies: string[] } {
+    data(): { decks: DECK[], loading: boolean, includeCookies: string[] } {
         return {
             decks: [],
             loading: false,
@@ -89,6 +98,27 @@ export default Vue.extend({
             if (idx > -1) {
                 this.includeCookies.splice(idx, 1);
                 this.FetchDeck();
+            }
+        },
+        async Vote(id: number) {
+            console.log(id);
+            try {
+                const ipRes = await axios.get('https://api.ipify.org?format=json');
+                const ip: string = ipRes.data.ip;
+                let data = await DeckService.Vote({
+                    ip: ip,
+                    deckId: id
+                });
+                data = data.data;
+                // replace
+                console.log(data)
+                if (data.code === 1) {
+                    Vue.set(this.decks, this.decks.findIndex(d => d.id === id), data.deck);
+                } else if(data.code === 0) {
+                    alert('한 사람이 좋아요를 두번 누를 수 없습니다.')
+                }
+            } catch (error) {
+                console.log('some error');
             }
         }
     },

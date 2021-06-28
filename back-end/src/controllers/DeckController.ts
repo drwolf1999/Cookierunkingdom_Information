@@ -1,6 +1,7 @@
 import * as express from "express";
 import Deck from "../models/deck";
 import CookieController from "./CookieController";
+import VoteDeck from "../models/voteDeck";
 
 export default {
     All: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -17,16 +18,16 @@ export default {
             if (includeCookie !== undefined) {
                 filter['units.cookie'] = {$all: includeCookie};
             }
-            console.log(filter);
             const ret = await Deck.find(
                 filter
             ); // TODO pagination
-            console.log(mode, ret)
+            console.log(ret)
             return res.status(200).json({
                 decks: ret,
                 message: 'success'
             });
         } catch (error) {
+            console.log(error)
             return res.status(500).json({
                 message: 'error'
             });
@@ -34,12 +35,10 @@ export default {
     },
     Write: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         const type = req.body.type;
-        const tier = req.body.tier === '' ? 'U' : req.body.tier;
         const deckName = req.body.name;
         const units = req.body.units;
         try {
             let deck = new Deck({
-                tier,
                 name: deckName,
                 units,
                 type,
@@ -73,7 +72,27 @@ export default {
             });
         }
     },
-    Info: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    Get: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const id = req.params.id;
+        try {
+            const ret = await Deck.find({id});
+            if (ret.length !== 1) {
+                return res.status(204).json({
+                    message: 'some error',
+                });
+            }
+            return res.status(200).json({
+                deck: ret[0],
+                message: 'success',
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                message: 'error',
+            });
+        }
+    },
+    Include: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
             console.log('info')
             const filter: Record<string, any> = {};
@@ -116,6 +135,41 @@ export default {
             return res.status(500).json({
                 message: 'error'
             });
+        }
+    },
+    Vote: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const ip = req.body.ip;
+        const deckId = req.body.deckId;
+        try {
+            const alreadyVoted = await VoteDeck.find({
+                ip,
+                deckId,
+            });
+            if (alreadyVoted.length > 0) {
+                return res.status(201).json({
+                    deck: null,
+                    code: 0,
+                    message: 'already voted',
+                });
+            }
+            const vote = new VoteDeck({
+                ip,
+                deckId,
+            });
+            await vote.save();
+            const newDeck = await Deck.findOneAndUpdate({id: deckId}, {$inc: {vote: 1}}, {new: true});
+            console.log(newDeck)
+            return res.status(201).json({
+                deck: newDeck,
+                code: 1,
+                message: 'vote success'
+            })
+        } catch (error) {
+            return res.status(500).json({
+                deck: null,
+                code: -1,
+                message: 'server error'
+            })
         }
     }
 }

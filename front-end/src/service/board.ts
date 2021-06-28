@@ -6,6 +6,7 @@ export default {
     // Get
     GetBoards(option: {
         query: string | null,
+        page: number,
     }): Promise<any> {
         console.log(option)
         return axios.get(`${Constants.SERVER_DOMAIN}/board`, {params: option});

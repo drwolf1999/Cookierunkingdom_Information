@@ -1,12 +1,11 @@
 import * as mongoose from "mongoose";
+import {AutoIncrementID} from "@typegoose/auto-increment";
 
 const DeckSchema = new mongoose.Schema({
-    tier: {
-        type: String,
-        enum: {
-            values: ['U', 'C', 'B', 'A', 'S'],
-            message: '{VALUE} is not supported'
-        }
+    id: {
+        type: Number,
+        default: 1,
+        unique: true,
     },
     name: {
         type: String,
@@ -56,7 +55,16 @@ const DeckSchema = new mongoose.Schema({
             message: '{VALUE} is not supported'
         },
         default: 'story'
+    },
+    vote: {
+        type: Number,
+        default: 0,
     }
+});
+
+DeckSchema.plugin(AutoIncrementID, {
+    field: 'id',
+    startAt: 1
 });
 
 const Deck = mongoose.model('deck', DeckSchema);

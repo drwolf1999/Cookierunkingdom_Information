@@ -12,6 +12,8 @@ import dotenv from "dotenv";
 
 import router from "./routes";
 
+import "./middleware/passport/index"
+
 /**
  * App Variables
  */
@@ -38,6 +40,7 @@ dotenv.config({
 
 // CONNECT TO MONGODB SERVER
 import constantsSecret from "./constants";
+
 const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => {

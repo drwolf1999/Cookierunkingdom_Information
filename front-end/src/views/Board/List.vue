@@ -3,7 +3,7 @@
         <v-card class="pa-4">
             <v-card-title>
                 <v-spacer></v-spacer>
-                <v-text-field v-model="Query" @keyup.enter="FetchBoard" label="게시물 검색" append-icon="mdi-magnify"></v-text-field>
+                <v-text-field v-model="query" @keyup.enter="Search" label="게시물 검색" append-icon="mdi-magnify"></v-text-field>
             </v-card-title>
             <v-card-text>
                 <v-simple-table>
@@ -16,7 +16,12 @@
                             <th class="text-left">날짜</th>
                         </tr>
                         </thead>
-                        <tbody v-if="boards.length">
+                        <tbody v-if="fetchingBoard">
+                        <tr>
+                            <td class="text-center" colspan="4">로딩중...</td>
+                        </tr>
+                        </tbody>
+                        <tbody v-else-if="boards.length">
                         <tr v-for="(board, index) in boards" :key="index">
                             <td class="col-1">{{ index + 1 }}</td>
                             <td class="col-7">
@@ -36,6 +41,11 @@
                         </tbody>
                     </template>
                 </v-simple-table>
+                <v-pagination
+                    total-visible="5"
+                    :length="allBoardSize"
+                    v-model="page"
+                ></v-pagination>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
@@ -51,25 +61,39 @@ import board from "@/service/board";
 
 export default Vue.extend({
     name: 'BoardList',
-    data(): { page: number, boards: [], Query: string } {
+    data(): { fetchingBoard: boolean, allBoardSize: number, page: number, boards: [], query: string } {
         return {
+            fetchingBoard: false,
+            allBoardSize: 1,
             page: 1,
             boards: [],
-            Query: ''
+            query: ''
         };
     },
     mounted() {
         this.FetchBoard();
     },
     methods: {
+        Search() {
+            this.page = 1;
+            this.FetchBoard();
+        },
         FetchBoard() {
-            console.log(this.Query)
+            this.fetchingBoard = true;
             board.GetBoards({
-                query: this.Query,
+                query: this.query,
+                page: this.page,
             })
                 .then(response => {
+                    this.fetchingBoard = false;
+                    this.allBoardSize = response.data.allBoardSize;
                     this.boards = response.data.boards;
                 });
+        }
+    },
+    watch: {
+        page() {
+            this.FetchBoard();
         }
     }
 })

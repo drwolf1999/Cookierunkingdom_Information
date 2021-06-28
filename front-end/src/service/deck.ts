@@ -11,7 +11,7 @@ export default {
     },
     GetDecksByCookie(option: Record<string, unknown>): Promise<any> {
         console.log(option)
-        return axios.get(`${Constants.SERVER_DOMAIN}/deck/info`, {params: option});
+        return axios.get(`${Constants.SERVER_DOMAIN}/deck/include`, {params: option});
     },
     // Post
     CreateDeck(data: any): Promise<any> {
@@ -20,4 +20,13 @@ export default {
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/deck/write`, data, {headers});
     },
+    Vote(data: {
+        ip: string,
+        deckId: number,
+    }): Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8'
+        };
+        return axios.post(`${Constants.SERVER_DOMAIN}/deck/vote`, data, {headers});
+    }
 };

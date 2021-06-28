@@ -5,12 +5,13 @@ import Comment from "../models/comment";
 export default {
     All: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         try {
+            const pageSize = 20;
             const query = req.query.query === undefined || req.query.query === null ? '' : req.query.query;
+            const page: number = req.query.page === undefined || req.query.page === null ? 1 : req.query.page as any;
             let ret = [];
-            console.log(query)
+            let filter = {};
             if (query !== '') {
-                // @ts-ignore
-                ret = await Board.find({
+                filter = {
                     $or: [
                         {
                             $or: [
@@ -22,14 +23,17 @@ export default {
                             $text: {$search: query, $caseSensitive: false}
                         }
                     ]
-                })
-                    .select('-_id -__v')
-                    .limit(20); // TODO pagination
-            } else {
-                ret = await Board.find({})
-                    .select('-_id -__v')
-                    .limit(20); // TODO pagination
+                };
             }
+            ret = await Board.find(filter)
+                .select('-_id -__v')
+                .sort({id: -1});
+            const boardSize = ret.length;
+            ret = await Board.find(filter)
+                .select('-_id -__v')
+                .sort({id: -1})
+                .limit(pageSize)
+                .skip(pageSize * (page - 1));
             // const boardComments: number[] = [];
             const retSize = ret.length;
             for (let i = 0; i < retSize; i++) {
@@ -38,9 +42,9 @@ export default {
                 ret[i] = r;
                 // boardComments.push(await Comment.countDocuments({boardId: ret[i].id}));
             }
-            console.log(ret);
             return res.status(200).json({
                 boards: ret,
+                allBoardSize: boardSize / pageSize + (boardSize % pageSize > 0 ? 1 : 0),
                 // commentSize: boardComments,
                 message: 'success'
             });

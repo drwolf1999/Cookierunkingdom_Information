@@ -18,9 +18,21 @@
                 >{{ link.name }}
                 </v-btn>
                 <v-btn text href="https://game.devplay.com/coupon/ck/ko" target="_blank">쿠폰 입력</v-btn>
-            </v-toolbar-items>
 
-            <!--            <v-spacer></v-spacer>-->
+            </v-toolbar-items>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+                <v-btn
+                    text
+                >
+                    <v-icon
+                        icon="mdi-account-circle"
+                        color="white"
+                    >
+                        mdi-account-circle
+                    </v-icon>
+                </v-btn>
+            </v-toolbar-items>
         </v-toolbar>
 
         <v-navigation-drawer v-model="sideNav" absolute temporary>

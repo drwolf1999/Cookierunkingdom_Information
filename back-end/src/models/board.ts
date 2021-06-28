@@ -12,15 +12,6 @@ interface IBoard {
     date: string
 }
 
-// tslint:disable-next-line:no-empty-interface
-interface IBoardDocument extends Document {
-    //
-}
-
-interface IBoardModel extends Model<IBoardDocument> {
-    search: (query: string, callback: (...arg: any) => void) => Promise<any>;
-}
-
 const BoardSchema: Schema<IBoard> = new Schema({
     id: {
         type: Number,
