@@ -21,18 +21,18 @@
 
             </v-toolbar-items>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
-                <v-btn
-                    text
-                >
-                    <v-icon
-                        icon="mdi-account-circle"
-                        color="white"
-                    >
-                        mdi-account-circle
-                    </v-icon>
-                </v-btn>
-            </v-toolbar-items>
+<!--            <v-toolbar-items>-->
+<!--                <v-btn-->
+<!--                    text-->
+<!--                >-->
+<!--                    <v-icon-->
+<!--                        icon="mdi-account-circle"-->
+<!--                        color="white"-->
+<!--                    >-->
+<!--                        mdi-account-circle-->
+<!--                    </v-icon>-->
+<!--                </v-btn>-->
+<!--            </v-toolbar-items>-->
         </v-toolbar>
 
         <v-navigation-drawer v-model="sideNav" absolute temporary>
@@ -86,6 +86,7 @@ export default Vue.extend({
             {url: '/deck?mode=guild', exact: true, name: '길드 덱', target: '_self'},
             {url: '/calc/dragon/hp', exact: true, name: '용 체력 계산기', target: '_self'},
             {url: '/cookies', exact: true, name: '쿠키', target: '_self'},
+            {url: '/treasures', exact: true, name: '보물', target: '_self'},
             {url: '/topping', exact: true, name: '토핑', target: '_self'},
             {url: '/board/community', exact: true, name: '커뮤니티', target: '_self'},
             {url: '/coupon', exact: true, name: '쿠폰 리스트', target: '_self'},

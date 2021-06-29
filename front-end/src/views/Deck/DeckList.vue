@@ -17,7 +17,7 @@
             </v-row>
             <div class="mt-7">
                 <v-expansion-panels v-if="!loading && decks.length > 0">
-                    <Deck class="mb-2" v-for="(deck, index) in decks" :key="index" :deck="deck" v-on:vote="Vote"/>
+                    <Deck class="mb-2" v-for="(deck, index) in decks" :key="index" :deck="deck" v-on:vote="Vote" :mode="mode"/>
                 </v-expansion-panels>
                 <v-card v-else-if="!loading" tile class="pa-3">
                     <v-card-text>아직 추천 덱이 없습니다..</v-card-text>

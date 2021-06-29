@@ -37,11 +37,15 @@ export default {
         const type = req.body.type;
         const deckName = req.body.name;
         const units = req.body.units;
+        const treasures = req.body.treasures;
+        const password = req.body.password;
         try {
             let deck = new Deck({
                 name: deckName,
                 units,
                 type,
+                treasures,
+                password
             });
             const unitsSize = units.length;
             for (let i = 0; i < unitsSize; i++) {
@@ -61,12 +65,13 @@ export default {
                 }
             }
             deck = await deck.save();
+            console.log('success')
             return res.status(201).json({
                 deck,
                 message: 'create success',
             });
         } catch (error) {
-            console.log(error);
+            console.log('error', error);
             return res.status(500).json({
                 message: 'error',
             });
@@ -171,5 +176,23 @@ export default {
                 message: 'server error'
             })
         }
-    }
+    },
+    Update: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const id = req.body.id;
+        const name = req.body.name;
+        const treasures = req.body.treasures;
+        const password = req.body.password;
+        const type = req.body.type;
+        const units = req.body.units;
+        try {
+            await Deck.findOneAndUpdate({id}, {name, treasures, type, units, password}, {new: true})
+            return res.status(201).json({
+                message: 'vote success'
+            })
+        } catch (error) {
+            return res.status(500).json({
+                message: 'server error'
+            })
+        }
+    },
 }

@@ -3,6 +3,7 @@ import VueRouter, {RouteConfig} from 'vue-router'
 // import Home from '@/views/Home.vue'
 import DeckList from '@/views/Deck/DeckList.vue'
 // import DeckView from '@/views/Deck/DeckView.vue'
+import Treasure from '@/views/Treasure/Index.vue';
 import Topping from '@/views/Topping/Index.vue';
 import Dragon from '@/views/Dragon/HP.vue';
 import Cookies from '@/views/Cookie/Index.vue';
@@ -25,7 +26,7 @@ const routes: Array<RouteConfig> = [
         path: '/deck/write',
         name: 'writeNewDeck',
         component: DeckForm,
-        props: (router) => ({mode: router.query.mode})
+        props: (router) => ({mode: router.query.mode, id: router.query.id})
     },
     {
         path: '/calc/dragon/hp',
@@ -36,6 +37,11 @@ const routes: Array<RouteConfig> = [
         path: '/cookies',
         name: 'cookie',
         component: Cookies
+    },
+    {
+        path: '/treasures',
+        name: 'treasure',
+        component: Treasure
     },
     {
         path: '/topping',
@@ -51,12 +57,6 @@ const routes: Array<RouteConfig> = [
         path: '/board/community/write',
         name: 'BoardWrite',
         component: BoardForm
-    },
-    {
-        path: '/board/community/modify/:boardId',
-        name: 'BoardUpdate',
-        component: BoardView,
-        props: true,
     },
     {
         path: '/board/community/view/:boardId',

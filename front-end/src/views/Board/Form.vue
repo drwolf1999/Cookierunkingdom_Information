@@ -28,11 +28,12 @@
                     </v-col>
                 </v-row>
                 <v-text-field outlined label="제목" v-model="post.title"></v-text-field>
-                <Editor label="본문" :content="post.content" v-on:input="post.content = $event"/>
+                <Editor :key="post.content" label="본문" v-bind:content="post.content" v-on:input="post.content = $event"/>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn text color="success" @click="DoPost">작성</v-btn>
+                <v-btn v-if="board === null" text color="success" @click="DoPost">작성</v-btn>
+                <v-btn v-else text color="success" @click="Update">수정하기</v-btn>
             </v-card-actions>
         </v-card>
     </div>
@@ -45,10 +46,12 @@ import board from "@/service/board";
 export default Vue.extend({
     components: {Editor},
     props: {
-        type: Object,
-
+        board: {
+            type: Object,
+            default: null,
+        }
     },
-    data(): { message: { content: string, view: boolean }, post: { username: string, password: '', title: string, content: string } } {
+    data(): { message: { content: string, view: boolean }, post: { username: string, password: '', title: string, content: string, } } {
         return {
             post: {
                 username: '',
@@ -62,6 +65,10 @@ export default Vue.extend({
             },
         };
     },
+    mounted() {
+        if (this.board !== null)
+            this.post = this.board;
+    },
     methods: {
         IsValid(e: string) {
             return e !== '';
@@ -70,16 +77,24 @@ export default Vue.extend({
             this.message.content = msg;
             this.message.view = true;
         },
-        DoPost() {
+        async DoPost() {
             if (!this.IsValid(this.post.username) || !this.IsValid(this.post.password) || !this.IsValid(this.post.title) || !this.IsValid(this.post.content)) {
                 this.SetMsg('모든 필드는 채워져야 합니다');
                 return;
             }
-            console.log(this.post);
-            board.CreateBoard(this.post).then(response => {
-                this.$router.push('/board/community');
+            const response = await board.CreateBoard(this.post);
+            this.$router.push('/board/community');
+
+        },
+        Update() {
+            if (!this.IsValid(this.post.username) || !this.IsValid(this.post.password) || !this.IsValid(this.post.title) || !this.IsValid(this.post.content)) {
+                this.SetMsg('모든 필드는 채워져야 합니다');
+                return;
+            }
+            board.UpdateBoard(this.post).then(response => {
+                this.$emit('update', response.data.board);
             })
-        }
+        },
     }
 })
 </script>

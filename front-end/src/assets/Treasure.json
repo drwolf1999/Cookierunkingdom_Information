@@ -1,0 +1,138 @@
+[
+    {
+        "key": "OldPilgrimsScroll",
+        "name": "나이든 순례자의 승리를 향한 무공비급",
+        "tier": "epic",
+        "description": "무공비급에서 힘을 얻어 모든 쿠키의 공격력이 증가합니다.",
+        "type": "패시브",
+        "effect": "공격력 (30 + 2.7n)% 증가"
+    },
+    {
+        "key": "LibrarianEnchantedRobes",
+        "name": "격분한 도서관 사서의 마법 망토",
+        "tier": "epic",
+        "description": "도서관 사서의 마법 망토로 공격 속도 증가율이 가장 높은 쿠키 2종의 공격 속도가 45% 만큼 증가합니다.\n",
+        "type": "패시브",
+        "effect": "공격속도 (45 + n)% 증가"
+    },
+    {
+        "key": "SugarSwanShinFeather",
+        "name": "설탕백조의 샤이닝 설탕깃털",
+        "tier": "epic",
+        "description": "설탕깃털의 힘이 가장 먼저 쓰러진 쿠키 하나를 부활시킵니다.",
+        "type": "패시브",
+        "effect": "부활 시 체력 (20 + 7.3n)%"
+    },
+    {
+        "key": "ElderPilgrimTorch",
+        "name": "순례자의 마을 촌장의 활활 화르륵 횃불",
+        "tier": "epic",
+        "description": "불타오르는 횃불이 가까운 적에게 모든 쿠키의 공격력 총합에 비례하는 피해를 지속적으로 줍니다.",
+        "type": "액티브_20",
+        "effect": "피해량 (20 + 2.7n)%"
+    },
+    {
+        "key": "JellyWormStickyGoo",
+        "name": "작은 뿔꿈틀이의 끈적끈적 방어용 점액",
+        "tier": "epic",
+        "description": "현재 체력이 제일 낮은 쿠키 하나가 점액질의 보호를 받아 무적이 됩니다.",
+        "type": "액티브_60",
+        "effect": "무적 (2 + 0.273n)초"
+    },
+    {
+        "key": "SacredPomegranateBranch",
+        "name": "정화된 석류신목의 신성한 나뭇가지",
+        "tier": "epic",
+        "description": "석류신목의 신성한 힘으로 소환수를 제외한 모든 쿠키에게 최대 체력의 일정 비율만큼 체력 보호막을 생성합니다.",
+        "type": "액티브_60",
+        "effect": "대상 체력의 (15+1.4n)% 체력 보호막 생성"
+    },
+    {
+        "key": "BooksellerMonocle",
+        "name": "책방골목 올빼미의 뽀득뽀득 모노클",
+        "tier": "epic",
+        "description": "모노클을 통해 쿠키를 바라보면 나쁜 기운을 판별해낼 수 있다는데? 아군의 디버프를 제거하고 체력을 회복시킵니다.",
+        "type": "액티브_23",
+        "effect": "23초마다 디버프 제거, 최대 체력의 (15+1.4n)% 회복"
+    },
+    {
+        "key": "BlindHealerStaff",
+        "name": "눈 먼 치료사의 힐링 스태프",
+        "tier": "epic",
+        "description": "현재 체력이 가장 낮은 아군을 총 공격력의 55%만큼 5초 동안 회복시킵니다.",
+        "type": "액티브_18",
+        "effect": "총 공격력의 (55+5n)%만큼 회복"
+    },
+    {
+        "key": "BearJellyLollipop",
+        "name": "행복한 곰젤리의 숨겨둔 사탕",
+        "tier": "rare",
+        "description": "사탕의 효과는 굉장했다! 공격력이 제일 높은 쿠키의 공격력과 치명타 확률이 증가합니다.",
+        "type": "액티브_15",
+        "effect": "6레벨까지 공격력 (16 + 4n)% 치명타 확률 20% 증가, 7레벨부터 공격력 40% 치명타 확률 (20 + 3.3(7-n))% 증가"
+    },
+    {
+        "key": "GrimlookingScythe",
+        "name": "골카론의 날카로운 낫",
+        "tier": "rare",
+        "description": "골카론의 낫이 도와서 모든 쿠키의 치명타 확률이 증가합니다.",
+        "type": "패시브",
+        "effect": "치명타 확률 (10 + 1.8n)% 증가"
+    },
+    {
+        "key": "MiraculousGhost",
+        "name": "아이스크림 상인 유령의 신기루 아이스크림",
+        "tier": "rare",
+        "description": "혼란을 일으키는 신기루가 가까운 적의 방어력을 감소시킵니다.",
+        "type": "액티브_10",
+        "effect": "방어력 (10 + 3.6n)% 감소"
+    },
+    {
+        "key": "PilgrimSlingshot",
+        "name": "어린 순례자의 장난감 새총",
+        "tier": "rare",
+        "description": "새총의 힘이 발동해 가장 멀리 있는 적 하나의 방어력을 감소시킵니다.",
+        "type": "액티브_10",
+        "effect": "방어력 (30 + 3.6n)% 감소"
+    },
+    {
+        "key": "PriestessCookiePaperCharm",
+        "name": "무녀맛 쿠키의 영험한 종이부적",
+        "tier": "rare",
+        "description": "종이부적의 저주가 가까운 적에게 날아가 모든 쿠키의 공격력 총합에 비례하는 피해를 주고, 모든 버프를 제거합니다.",
+        "type": "액티브_15",
+        "effect": "피해량 (15 + 1.8n)%"
+    },
+    {
+        "key": "GatekeeperGhostHorn",
+        "name": "문지기 유령의 단단한 오른쪽 뿔",
+        "tier": "common",
+        "description": "단단한 뿔로 몸을 지켜서 모든 쿠키의 방어력이 증가합니다.",
+        "type": "패시브",
+        "effect": "방어력 (30 + 1.4n)% 증가"
+    },
+    {
+        "key": "CheesebirdCoinPurse",
+        "name": "치즈볼새의 소중한 동전 주머니",
+        "tier": "common",
+        "description": "티끌 모아 태산! 적을 쓰러뜨릴 때 일정 확률로 추가 코인을 얻습니다.",
+        "type": "패시브",
+        "effect": "코인 획득 확률 (20 + 5.5n)%"
+    },
+    {
+        "key": "SquishyJellyWatch",
+        "name": "왕자 곰젤리의 말랑말랑 젤리시계",
+        "tier": "common",
+        "description": "언제나 조금씩 빨라지는 젤리시계 덕분에 모든 쿠키의 쿨타임이 감소합니다.",
+        "type": "패시브",
+        "effect": "쿨타임 (10 + 1.4n)% 감소"
+    },
+    {
+        "key": "GinkgoblinTrophySafe",
+        "name": "은행강도의 탐욕스런 마법 금고",
+        "tier": "common",
+        "description": "욕심많은 누군가의 마법 금고가 자력 1단계의 힘으로, 전투 승리 시 5% 추가 코인을 얻습니다.",
+        "type": "패시브",
+        "effect": "마법 금고 자력 1단계, (5+ 0.4n)% 추가 코인"
+    }
+]

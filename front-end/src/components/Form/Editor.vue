@@ -12,8 +12,11 @@ export default Vue.extend({
     name: 'Editor',
     data() {
         return {
-            Content: this.content === null || this.content === undefined ? '' : this.content,
+            Content: ''
         }
+    },
+    mounted() {
+        this.Content = this.content;
     },
     computed: {
         Config() {
@@ -23,7 +26,7 @@ export default Vue.extend({
     props: {
         content: {
             type: [Object, String],
-            default: null,
+            default: '',
         },
         label: {
             type: String,

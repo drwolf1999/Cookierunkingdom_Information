@@ -6,5 +6,6 @@ import BoardController from "../../controllers/BoardController";
 router.get('/', BoardController.All);
 router.get('/:id', BoardController.GetById);
 router.post('/write', BoardController.Write);
+router.post('/update', BoardController.Update);
 
 export default router;

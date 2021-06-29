@@ -8,5 +8,6 @@ router.get('/get/:id', DeckController.Get);
 router.post('/write', DeckController.Write);
 router.get('/include', DeckController.Include);
 router.post('/vote', DeckController.Vote);
+router.post('/update', DeckController.Update);
 
 export default router;

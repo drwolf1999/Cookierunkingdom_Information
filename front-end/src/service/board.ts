@@ -8,7 +8,6 @@ export default {
         query: string | null,
         page: number,
     }): Promise<any> {
-        console.log(option)
         return axios.get(`${Constants.SERVER_DOMAIN}/board`, {params: option});
     },
     GetBoardById(id: number | string): Promise<any> {
@@ -25,5 +24,17 @@ export default {
             'Content-Type': 'application/json; charset=utf-8'
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/board/write`, data, {headers});
+    },
+    UpdateBoard(data: {
+        id: number,
+        username: string,
+        password: string,
+        title: string,
+        content: string,
+    }): Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8'
+        };
+        return axios.post(`${Constants.SERVER_DOMAIN}/board/update`, data, {headers});
     },
 };

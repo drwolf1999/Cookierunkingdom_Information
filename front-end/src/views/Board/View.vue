@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="mode === 1">
         <v-card class="pa-3" v-if="!boardLoading">
             <v-card-title>{{ board.title }}</v-card-title>
             <v-card-subtitle>
@@ -27,6 +27,10 @@
             <v-card-text class="mt-2">
                 <div id="board__content" v-html="board.content"></div>
             </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn text @click="mode = 2">글 수정하기</v-btn>
+            </v-card-actions>
         </v-card>
 
         <v-skeleton-loader type="card" v-else></v-skeleton-loader>
@@ -67,6 +71,28 @@
         <v-skeleton-loader type="card" class="mt-5" v-else></v-skeleton-loader>
         <CommentForm label="댓글 달기" :board-id="boardId" v-on:update="FetchComment"/>
     </div>
+    <div v-else-if="mode === 2">
+        <v-card>
+            <v-card>
+                <v-card-title>비밀번호 확인</v-card-title>
+                <v-card-text>
+                    <v-row justify="center" align="center">
+                        <v-col cols="3">비밀번호 입력</v-col>
+                        <v-col cols="9">
+                            <v-text-field type="password" v-model="confirmPassword"></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="CheckAllow">확인</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-card>
+    </div>
+    <div v-else>
+        <Form :board="board" v-on:update="board = $event; mode = 1"/>
+    </div>
 </template>
 
 <script lang="ts">
@@ -74,6 +100,7 @@ import Vue from "vue";
 import board from "@/service/board";
 import CommentForm from "@/components/CommentForm.vue";
 import CommentService from "@/service/comment";
+import Form from "@/views/Board/Form.vue";
 
 interface comment {
     username: string,
@@ -84,7 +111,7 @@ interface comment {
 
 export default Vue.extend({
     name: 'BoardView',
-    components: {CommentForm},
+    components: {Form, CommentForm},
     props: {
         boardId: {
             type: [Number, String],
@@ -95,8 +122,10 @@ export default Vue.extend({
         this.FetchBoard();
         this.FetchComment();
     },
-    data(): { replyVisible: number, boardLoading: boolean, commentLoading: boolean, board: { username: string, title: string, content: string, date: string }, comments: comment[], commentLength: number } {
+    data(): { confirmPassword: string, mode: number, replyVisible: number, boardLoading: boolean, commentLoading: boolean, board: { username: string, title: string, content: string, date: string }, comments: comment[], commentLength: number } {
         return {
+            confirmPassword: '',
+            mode: 1,
             replyVisible: -1,
             boardLoading: false,
             commentLoading: false,
@@ -132,6 +161,13 @@ export default Vue.extend({
         ToggleComment(index: number) {
             if (this.replyVisible === index) this.replyVisible = -1;
             else this.replyVisible = index;
+        },
+        CheckAllow() {
+            if (this.board.password === this.confirmPassword) {
+                this.mode = 3;
+            } else {
+                alert('비밀번호가 틀립니다. 다시 확인해주세요');
+            }
         },
     },
     watch: {

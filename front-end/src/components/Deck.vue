@@ -42,8 +42,8 @@
             </div>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-            <v-card outlined class="pt-3">
-                <v-row v-for="(unit, indexI) in deck.units" :key="`lg_xl_${indexI}`" class="mb-3 ml-5 hidden-md-and-down" align="center">
+            <v-card outlined class="pa-4">
+                <v-row v-for="(unit, indexI) in deck.units" :key="`lg_xl_${indexI}`" class="mb-3 hidden-md-and-down" align="center">
                     <v-col cols="2">
                         <Cookie v-bind:cookie-key="unit.cookie" v-bind:img-size="`middle`"/>
                     </v-col>
@@ -80,9 +80,14 @@
                     </v-row>
 
                 </div>
+
+                <div v-if="deck.treasures !== undefined && deck.treasures !== null" class="d-flex">
+                    <Treasure class="float-left" v-for="treasure in deck.treasures" :key="treasure" :treasure-key="treasure"/>
+                </div>
             </v-card>
             <v-card-actions>
                 <v-spacer></v-spacer>
+                <v-btn text :to="`/deck/write?id=${deck.id}&mode=${mode}`">수정하기</v-btn>
                 <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
@@ -107,6 +112,7 @@ import Vue from 'vue';
 import Cookie from "@/components/Cookie.vue";
 import Topping from "@/components/Topping.vue";
 import DeckPreview from "@/components/DeckPreview.vue";
+import Treasure from "@/components/Treasure.vue";
 
 export default Vue.extend({
     name: 'Deck',
@@ -114,10 +120,15 @@ export default Vue.extend({
     props: {
         deck: {
             type: Object,
+        },
+        mode: {
+            type: String,
+            required: true,
         }
     },
 
     components: {
+        Treasure,
         DeckPreview,
         Topping,
         Cookie,

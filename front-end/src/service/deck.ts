@@ -6,11 +6,12 @@ import axios from "axios";
 export default {
     // Get
     GetDecks(option: Record<string, unknown>): Promise<any> {
-        console.log(option)
         return axios.get(`${Constants.SERVER_DOMAIN}/deck`, {params: option});
     },
+    GetDeckById(id: number): Promise<any> {
+        return axios.get(`${Constants.SERVER_DOMAIN}/deck/get/${id}`);
+    },
     GetDecksByCookie(option: Record<string, unknown>): Promise<any> {
-        console.log(option)
         return axios.get(`${Constants.SERVER_DOMAIN}/deck/include`, {params: option});
     },
     // Post
@@ -19,6 +20,12 @@ export default {
             'Content-Type': 'application/json; charset=utf-8'
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/deck/write`, data, {headers});
+    },
+    Update(data: any): Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8'
+        };
+        return axios.post(`${Constants.SERVER_DOMAIN}/deck/update`, data, {headers});
     },
     Vote(data: {
         ip: string,

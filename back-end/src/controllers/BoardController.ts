@@ -85,7 +85,7 @@ export default {
         try {
             // tslint:disable-next-line:radix
             const id = parseInt(req.params.id);
-            const ret = await Board.findOne({id}, '-_id -__v -id -password');
+            const ret = await Board.findOne({id}, '-_id -__v');
             return res.status(200).json({
                 board: ret,
                 message: 'success'
@@ -94,6 +94,25 @@ export default {
             console.log(error)
             return res.status(500).json({
                 message: 'error'
+            });
+        }
+    },
+    Update: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const id = req.body.id;
+        const username = req.body.username;
+        const password = req.body.password;
+        const title = req.body.title;
+        const content = req.body.content;
+        try {
+            const result = await Board.findOneAndUpdate({id}, {username, password, title, content}, {new: true,});
+            return res.status(201).json({
+                board: result,
+                message: 'create success',
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                message: 'error',
             });
         }
     },

@@ -48,6 +48,18 @@ const DeckSchema = new mongoose.Schema({
             message: props => `${props.value} is not valid units`
         }
     },
+    treasures: {
+        type: [String],
+        validate: {
+            validator: (v: any) => {
+                if (!Array.isArray(v)) {
+                    return false;
+                }
+                return v.length <= 3;
+            },
+            message: props => `${props.value} is not valid treasures`
+        }
+    },
     type: {
         type: String,
         enum: {
@@ -59,7 +71,11 @@ const DeckSchema = new mongoose.Schema({
     vote: {
         type: Number,
         default: 0,
-    }
+    },
+    password: {
+        type: String,
+        require: true,
+    },
 });
 
 DeckSchema.plugin(AutoIncrementID, {
