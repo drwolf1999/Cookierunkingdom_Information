@@ -232,7 +232,8 @@ export default Vue.extend({
             delete this.toppings[v];
         },
         async Load() {
-            const res = await deck.GetDeckById(this.id);
+            const id = parseInt(this.id.toString());
+            const res = await deck.GetDeckById(id);
             const deckInfo = res.data.deck;
             this.treasures = deckInfo.treasures;
             const deckSize = deckInfo.units.length;
@@ -272,9 +273,9 @@ export default Vue.extend({
                 password: this.password,
                 treasures: this.treasures,
             };
-            const id = parseInt(this.id);
+            const id = parseInt(this.id.toString());
             if (id !== -1) {
-                data["id"] = id;
+                Object.defineProperty(data, 'id', id);
                 await deck.Update(data);
             } else {
                 await deck.CreateDeck(data);
@@ -294,7 +295,7 @@ export default Vue.extend({
                 this.alreadyDecks = response.data.decks;
             })
         },
-        AddTreasure(t) {
+        AddTreasure(t: string) {
             if (this.treasures.indexOf(t) > -1) {
                 this.SetMsg(DUPLICATE_TREASURE);
                 return;
@@ -305,7 +306,7 @@ export default Vue.extend({
             }
             this.treasures.push(t);
         },
-        DeleteTreasure(t) {
+        DeleteTreasure(t: string) {
             this.treasures.splice(this.treasures.indexOf(t), 1);
         },
         CheckAllow() {

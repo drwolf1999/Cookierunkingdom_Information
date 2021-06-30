@@ -56,6 +56,7 @@
 import Vue from "vue";
 import TreasureClass from "@/constants/treasure.ts";
 import Treasure from "@/components/Treasure.vue";
+import ITreasure from "@/interface/treasure";
 
 export default Vue.extend({
     name: 'TreasureView',
@@ -74,11 +75,11 @@ export default Vue.extend({
         }
     },
     computed: {
-        Treasure(): Record<string, unknown> {
+        Treasure(): ITreasure {
             console.log(this.treasureKey)
             return TreasureClass.GetTreasureByKey(this.treasureKey);
         },
-        TreasureType(): Array {
+        TreasureType(): Array<string> {
             const treasure = this.Treasure;
             return treasure.type.split('_');
         }

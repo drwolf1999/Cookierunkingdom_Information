@@ -101,6 +101,7 @@ import board from "@/service/board";
 import CommentForm from "@/components/CommentForm.vue";
 import CommentService from "@/service/comment";
 import Form from "@/views/Board/Form.vue";
+import {IBoard} from "@/interface/board";
 
 interface comment {
     username: string,
@@ -122,7 +123,7 @@ export default Vue.extend({
         this.FetchBoard();
         this.FetchComment();
     },
-    data(): { confirmPassword: string, mode: number, replyVisible: number, boardLoading: boolean, commentLoading: boolean, board: { username: string, title: string, content: string, date: string }, comments: comment[], commentLength: number } {
+    data(): { confirmPassword: string, mode: number, replyVisible: number, boardLoading: boolean, commentLoading: boolean, board: IBoard, comments: comment[], commentLength: number } {
         return {
             confirmPassword: '',
             mode: 1,
@@ -130,6 +131,8 @@ export default Vue.extend({
             boardLoading: false,
             commentLoading: false,
             board: {
+                id: -1,
+                password: '',
                 username: '이름',
                 title: '제목',
                 content: '내용',

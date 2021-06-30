@@ -42,6 +42,7 @@
 import Vue from "vue";
 import Editor from "@/components/Form/Editor.vue";
 import board from "@/service/board";
+import {IBoard, IBoardForm} from "@/interface/board";
 
 export default Vue.extend({
     components: {Editor},
@@ -51,9 +52,11 @@ export default Vue.extend({
             default: null,
         }
     },
-    data(): { message: { content: string, view: boolean }, post: { username: string, password: '', title: string, content: string, } } {
+    data(): { message: { content: string, view: boolean }, post: IBoard } {
         return {
             post: {
+                id: null,
+                date: null,
                 username: '',
                 password: '',
                 title: '',

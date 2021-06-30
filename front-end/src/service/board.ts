@@ -1,5 +1,6 @@
 import Constants from "@/constants/RestAPI";
 import axios from "axios";
+import {IBoard, IBoardForm} from "@/interface/board";
 
 // auth 에 대한 Action 정의
 export default {
@@ -14,24 +15,13 @@ export default {
         return axios.get(`${Constants.SERVER_DOMAIN}/board/${id}`);
     },
     // Post
-    CreateBoard(data: {
-        username: string,
-        password: string,
-        title: string,
-        content: string,
-    }): Promise<any> {
+    CreateBoard(data: IBoard): Promise<any> {
         const headers = {
             'Content-Type': 'application/json; charset=utf-8'
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/board/write`, data, {headers});
     },
-    UpdateBoard(data: {
-        id: number,
-        username: string,
-        password: string,
-        title: string,
-        content: string,
-    }): Promise<any> {
+    UpdateBoard(data: IBoard): Promise<any> {
         const headers = {
             'Content-Type': 'application/json; charset=utf-8'
         };

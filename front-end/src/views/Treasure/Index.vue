@@ -23,6 +23,7 @@
 import TreasureClass from "@/constants/treasure.ts";
 import Vue from "vue";
 import TreasureView from "@/components/TreasureView.vue";
+import ITreasure from "@/interface/treasure";
 
 export default Vue.extend({
     name: 'TreasureIndex',
@@ -36,7 +37,7 @@ export default Vue.extend({
         },
     },
     computed: {
-        Treasures(): Array<Record<string, unknown>> {
+        Treasures(): Array<ITreasure> {
             console.log(TreasureClass.GetTreasures());
             return TreasureClass.GetTreasures();
         },
