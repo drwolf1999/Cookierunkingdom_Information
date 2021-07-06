@@ -38,7 +38,6 @@ export default Vue.extend({
     },
     computed: {
         Treasures(): Array<ITreasure> {
-            console.log(TreasureClass.GetTreasures());
             return TreasureClass.GetTreasures();
         },
         TreasureCount(): number {

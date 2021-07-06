@@ -76,7 +76,6 @@ export default Vue.extend({
     },
     computed: {
         Treasure(): ITreasure {
-            console.log(this.treasureKey)
             return TreasureClass.GetTreasureByKey(this.treasureKey);
         },
         TreasureType(): Array<string> {
