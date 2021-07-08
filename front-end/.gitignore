@@ -23,3 +23,9 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# ssl file
+C1E22F962221E407368FD219E7F4E495.txt
+
+
+Dockerfile
