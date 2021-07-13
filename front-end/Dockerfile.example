@@ -37,9 +37,6 @@ RUN /bin/cp -r dist/* /var/www/html
 # make all files belong to the nginx user
 RUN chown nginx:nginx /var/www/html
 
-RUN /bin/mkdir -p /var/www/html/.well-known/pki-validation
-RUN /bin/cp C1E22F962221E407368FD219E7F4E495.txt /var/www/html/.well-known/pki-validation
-
 EXPOSE 80
 
 # start nginx and keep the process from backgrounding and the container from quitting
