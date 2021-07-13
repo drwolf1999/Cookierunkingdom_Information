@@ -51,7 +51,7 @@
                     <v-col :cols="GetImgSize === 'xs' ? 12 : 6">
                         <v-text-field v-model="deckName" label="덱 이름" type="text"></v-text-field>
                     </v-col>
-                    <v-col :cols="GetImgSize === 'xs' ? 12 : 6">
+                    <v-col :cols="GetImgSize === 'xs' ? 12 : 6" v-if="this.id === -1">
                         <v-text-field v-model="password" label="비밀번호(수정을 위해 필요합니다.)" type="password"></v-text-field>
                     </v-col>
                     <v-col cols="7">
@@ -309,8 +309,12 @@ export default Vue.extend({
         DeleteTreasure(t: string) {
             this.treasures.splice(this.treasures.indexOf(t), 1);
         },
-        CheckAllow() {
-            if (this.confirmPassword === this.password) {
+        async CheckAllow() {
+            const response = await deck.CheckPassword({
+                id: parseInt(this.id.toString()),
+                password: this.confirmPassword,
+            });
+            if (response.data.code === 1) {
                 this.allow = true;
             } else {
                 alert('비밀번호가 틀립니다. 다시 시도해 주세요');

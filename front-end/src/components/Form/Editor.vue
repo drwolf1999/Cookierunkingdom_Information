@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-subheader>{{ label }}</v-subheader>
-        <vue-editor v-model="Content" :editorToolbar="Config"></vue-editor>
+        <vue-editor :value="content" @input="onInput" :editorToolbar="Config"></vue-editor>
     </div>
 </template>
 
@@ -12,11 +12,7 @@ export default Vue.extend({
     name: 'Editor',
     data() {
         return {
-            Content: ''
         }
-    },
-    mounted() {
-        this.Content = this.content;
     },
     computed: {
         Config() {
@@ -36,7 +32,7 @@ export default Vue.extend({
     methods: {
         onInput() {
             if (this.readOnly) return;
-            this.$emit('input', this.Content);
+            this.$emit('input', this.content);
         },
     },
     components: {

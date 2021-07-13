@@ -9,5 +9,6 @@ router.post('/write', DeckController.Write);
 router.get('/include', DeckController.Include);
 router.post('/vote', DeckController.Vote);
 router.post('/update', DeckController.Update);
+router.post('/password', DeckController.CheckPassword);
 
 export default router;

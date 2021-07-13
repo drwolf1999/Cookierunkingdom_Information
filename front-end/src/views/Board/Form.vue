@@ -42,7 +42,7 @@
 import Vue from "vue";
 import Editor from "@/components/Form/Editor.vue";
 import board from "@/service/board";
-import {IBoard, IBoardForm} from "@/interface/board";
+import {IBoard} from "@/interface/board";
 
 export default Vue.extend({
     components: {Editor},
@@ -58,7 +58,7 @@ export default Vue.extend({
                 id: null,
                 date: null,
                 username: '',
-                password: '',
+                password: null,
                 title: '',
                 content: '',
             },
@@ -81,16 +81,15 @@ export default Vue.extend({
             this.message.view = true;
         },
         async DoPost() {
-            if (!this.IsValid(this.post.username) || !this.IsValid(this.post.password) || !this.IsValid(this.post.title) || !this.IsValid(this.post.content)) {
+            if (!this.IsValid(this.post.username) || !this.IsValid(this.post.password === null ? '' : this.post.password) || !this.IsValid(this.post.title) || !this.IsValid(this.post.content)) {
                 this.SetMsg('모든 필드는 채워져야 합니다');
                 return;
             }
-            const response = await board.CreateBoard(this.post);
-            this.$router.push('/board/community');
-
+            await board.CreateBoard(this.post);
+            await this.$router.push('/board/community');
         },
         Update() {
-            if (!this.IsValid(this.post.username) || !this.IsValid(this.post.password) || !this.IsValid(this.post.title) || !this.IsValid(this.post.content)) {
+            if (!this.IsValid(this.post.username) || !this.IsValid(this.post.password === null ? '' : this.post.password) || !this.IsValid(this.post.title) || !this.IsValid(this.post.content)) {
                 this.SetMsg('모든 필드는 채워져야 합니다');
                 return;
             }

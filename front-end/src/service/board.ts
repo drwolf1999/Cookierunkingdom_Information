@@ -1,6 +1,6 @@
 import Constants from "@/constants/RestAPI";
 import axios from "axios";
-import {IBoard, IBoardForm} from "@/interface/board";
+import {IBoard} from "@/interface/board";
 
 // auth 에 대한 Action 정의
 export default {
@@ -27,4 +27,13 @@ export default {
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/board/update`, data, {headers});
     },
+    CheckPassword(data: {
+        id: number,
+        password: string,
+    }): Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8'
+        };
+        return axios.post(`${Constants.SERVER_DOMAIN}/board/password`, data, {headers});
+    }
 };

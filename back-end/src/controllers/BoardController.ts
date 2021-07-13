@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as HashModule from "../middleware/hash";
 import Board from "../models/board";
 import Comment from "../models/comment";
 
@@ -61,15 +62,15 @@ export default {
         const title = req.body.title;
         const content = req.body.content;
         try {
+            const hashPwd = HashModule.hash(password);
             let board = new Board({
                 id: 0,
                 username,
-                password,
+                password: hashPwd,
                 title,
                 content,
             });
             board = await board.save();
-            console.log(board)
             return res.status(201).json({
                 board,
                 message: 'create success',
@@ -85,7 +86,7 @@ export default {
         try {
             // tslint:disable-next-line:radix
             const id = parseInt(req.params.id);
-            const ret = await Board.findOne({id}, '-_id -__v');
+            const ret = await Board.findOne({id}, '-_id -__v -password');
             return res.status(200).json({
                 board: ret,
                 message: 'success'
@@ -108,6 +109,34 @@ export default {
             return res.status(201).json({
                 board: result,
                 message: 'create success',
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                message: 'error',
+            });
+        }
+    },
+    CheckPassword: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const id = req.body.id;
+        const password = req.body.password;
+        try {
+            const board = await Board.findOne({id});
+            if (!board) {
+                return res.status(404).json({
+                    code: 0,
+                    message: 'valid board id',
+                });
+            }
+            if (HashModule.compare(password, board.password)) {
+                return res.status(201).json({
+                    code: 1,
+                    message: 'ok',
+                })
+            }
+            return res.status(201).json({
+                code: 0,
+                message: 'password not matched',
             });
         } catch (error) {
             console.log(error);

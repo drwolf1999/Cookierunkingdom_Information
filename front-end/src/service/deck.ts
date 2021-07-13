@@ -15,13 +15,13 @@ export default {
         return axios.get(`${Constants.SERVER_DOMAIN}/deck/include`, {params: option});
     },
     // Post
-    CreateDeck(data: any): Promise<any> {
+    CreateDeck(data: Record<string, unknown>): Promise<any> {
         const headers = {
             'Content-Type': 'application/json; charset=utf-8'
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/deck/write`, data, {headers});
     },
-    Update(data: any): Promise<any> {
+    Update(data: Record<string, unknown>): Promise<any> {
         const headers = {
             'Content-Type': 'application/json; charset=utf-8'
         };
@@ -35,5 +35,14 @@ export default {
             'Content-Type': 'application/json; charset=utf-8'
         };
         return axios.post(`${Constants.SERVER_DOMAIN}/deck/vote`, data, {headers});
-    }
+    },
+    CheckPassword(data: {
+        id: number,
+        password: string,
+    }): Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8'
+        };
+        return axios.post(`${Constants.SERVER_DOMAIN}/deck/password`, data, {headers});
+    },
 };

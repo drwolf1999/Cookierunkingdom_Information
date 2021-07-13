@@ -7,5 +7,6 @@ router.get('/', BoardController.All);
 router.get('/:id', BoardController.GetById);
 router.post('/write', BoardController.Write);
 router.post('/update', BoardController.Update);
+router.post('/password', BoardController.CheckPassword);
 
 export default router;

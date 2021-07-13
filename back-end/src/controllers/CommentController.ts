@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as HashModule from "../middleware/hash";
 import Comment from "../models/comment";
 
 export default {
@@ -44,17 +45,16 @@ export default {
         const password = req.body.password;
         const content = req.body.content;
         const parentComment = req.body.parentComment;
-        console.log(boardId, username, password, content, parentComment)
         try {
+            const hashPwd = HashModule.hash(password);
             let board = new Comment({
                 boardId,
                 username,
-                password,
+                password: hashPwd,
                 content,
                 parentComment
             });
             board = await board.save();
-            console.log(board)
             return res.status(201).json({
                 board,
                 message: 'create success',

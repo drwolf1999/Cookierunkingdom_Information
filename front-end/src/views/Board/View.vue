@@ -97,7 +97,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import board from "@/service/board";
+import BoardService from "@/service/board";
 import CommentForm from "@/components/CommentForm.vue";
 import CommentService from "@/service/comment";
 import Form from "@/views/Board/Form.vue";
@@ -131,7 +131,7 @@ export default Vue.extend({
             boardLoading: false,
             commentLoading: false,
             board: {
-                id: -1,
+                id: null,
                 password: '',
                 username: '이름',
                 title: '제목',
@@ -145,7 +145,7 @@ export default Vue.extend({
     methods: {
         FetchBoard() {
             this.boardLoading = true;
-            board.GetBoardById(this.boardId)
+            BoardService.GetBoardById(this.boardId)
                 .then(response => {
                     this.boardLoading = false;
                     this.board = response.data.board;
@@ -165,8 +165,17 @@ export default Vue.extend({
             if (this.replyVisible === index) this.replyVisible = -1;
             else this.replyVisible = index;
         },
-        CheckAllow() {
-            if (this.board.password === this.confirmPassword) {
+        async CheckAllow() {
+            if (this.board.id === null) {
+                alert('잘못된 접근입니다.');
+                await this.$router.push('/');
+                return;
+            }
+            const response = await BoardService.CheckPassword({
+                id: this.board.id,
+                password: this.confirmPassword
+            });
+            if (response.data.code === 1) {
                 this.mode = 3;
             } else {
                 alert('비밀번호가 틀립니다. 다시 확인해주세요');

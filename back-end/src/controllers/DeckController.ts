@@ -1,7 +1,9 @@
 import * as express from "express";
 import Deck from "../models/deck";
+import * as HashModule from '../middleware/hash';
 import CookieController from "./CookieController";
 import VoteDeck from "../models/voteDeck";
+import Board from "../models/board";
 
 export default {
     All: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -40,12 +42,13 @@ export default {
         const treasures = req.body.treasures;
         const password = req.body.password;
         try {
+            const hashPwd = HashModule.hash(password);
             let deck = new Deck({
                 name: deckName,
                 units,
                 type,
                 treasures,
-                password
+                password: hashPwd,
             });
             const unitsSize = units.length;
             for (let i = 0; i < unitsSize; i++) {
@@ -185,7 +188,8 @@ export default {
         const type = req.body.type;
         const units = req.body.units;
         try {
-            await Deck.findOneAndUpdate({id}, {name, treasures, type, units, password}, {new: true})
+            const hashPwd = HashModule.hash(password);
+            await Deck.findOneAndUpdate({id}, {name, treasures, type, units, password: hashPwd}, {new: true})
             return res.status(201).json({
                 message: 'vote success'
             })
@@ -195,4 +199,32 @@ export default {
             })
         }
     },
+    CheckPassword: async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const id = req.body.id;
+        const password = req.body.password;
+        try {
+            const deck = await Deck.findOne({id});
+            if (!deck) {
+                return res.status(404).json({
+                    code: 0,
+                    message: 'valid deck id',
+                });
+            }
+            if (HashModule.compare(password, deck.password)) {
+                return res.status(201).json({
+                    code: 1,
+                    message: 'ok',
+                })
+            }
+            return res.status(201).json({
+                code: 0,
+                message: 'password not matched',
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                message: 'error',
+            });
+        }
+    }
 }
